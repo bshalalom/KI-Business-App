@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+openai==0.28
+pypdf
+requests
+selenium
+webdriver-manager
+python-multipart
