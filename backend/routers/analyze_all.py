@@ -4,12 +4,14 @@ from pydantic import BaseModel
 from typing import List, Optional
 import requests
 
+# KORREKTUR: Wir gehen zurück zu den 'backend.'-Importen
 from backend.PerplexityAgent import PerplexityAgent
 from backend.OpenAIAnalysisAgent import OpenAIAnalysisAgent
 from backend.OpenAIReviewerAgent import OpenAIReviewerAgent
 from backend.pdfReader import extract_text_from_pdf
 from backend.WebScraper import scrape_website
-import backend.config as config
+from backend import config
+
 
 router = APIRouter()
 
@@ -50,18 +52,15 @@ async def analyze_all(
             else:
                 scraped_data = await run_in_threadpool(scrape_website, url)
                 if scraped_data.text and not scraped_data.error:
-                    # KORREKTUR: Wir kürzen den Text jeder Quelle, um das Token-Limit nicht zu überschreiten
-                    web_texts.append(scraped_data.text[:3500]) # Kürzen auf 3500 Zeichen
+                    web_texts.append(scraped_data.text[:3500])
                 elif scraped_data.error:
                      web_texts.append(f"[Fehler beim Scrapen von {url}: {scraped_data.error}]")
         except Exception as e:
             web_texts.append(f"[Fehler bei der Verarbeitung von URL {url}: {str(e)}]")
-
-    # Der finale Kontext für die KI
-    scraped_context = "\n\n---\n\n".join(web_texts)
-    full_text = f"Recherche-Zusammenfassung:\n{perplexity_summary}\n\nZusätzliche Details aus den Quellen:\n{scraped_context}"
     
     combined_pdf_text = "\n\n".join(pdf_texts_list)
+    full_text = f"Recherche-Zusammenfassung:\n{perplexity_summary}\n\nZusätzliche Details aus den Quellen:\n{scraped_context}"
+
     analyzer = OpenAIAnalysisAgent(api_key=config.OPENAI_API_KEY)
     reviewer = OpenAIReviewerAgent(api_key=config.OPENAI_API_KEY)
 
@@ -77,7 +76,6 @@ async def analyze_all(
         )
         if score >= 8:
             break
-        # Wir fügen das Feedback hinzu, aber kürzen es auch, falls es sehr lang ist
         full_text += "\n\nFeedback zur Verbesserung:\n" + feedback[:1000]
 
     return AnalyzeResponse(

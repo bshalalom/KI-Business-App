@@ -1,7 +1,12 @@
+import asyncio
+import sys
+
+# Dieser Block behebt ein Kompatibilitätsproblem von Playwright/Asyncio unter Windows
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
 from fastapi import FastAPI
-from backend.routers import analyze_all
-from backend.routers import openai_agents
-from backend.routers import perplexity_agent
+from backend.routers import analyze_all, openai_agents, perplexity_agent
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -18,14 +23,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Einbinden der verschiedenen API-Routen
 app.include_router(analyze_all.router)
 app.include_router(openai_agents.router)
 app.include_router(perplexity_agent.router)
 
+# Standard-Endpunkt zur Überprüfung, ob der Server läuft
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
+# Einfacher Test-Endpunkt
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
