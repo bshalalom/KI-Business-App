@@ -11,10 +11,16 @@ class PerplexityAgent:
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json"
         }
-        creative_prompt = f"""Führe eine Marktrecherche für eine neue, innovative Geschäftsidee zum Thema '{prompt_text}' durch.
-Finde und zitiere 3-5 informative Online-Quellen wie Blog-Artikel, Marktanalysen oder technische Berichte.
-Vermeide bitte direkte Links zu App-Stores oder sozialen Medien.
-Fasse die wichtigsten Erkenntnisse aus den gefundenen Quellen zusammen und identifiziere mögliche Nischen oder ungelöste Probleme, die als Grundlage für die neue Geschäftsidee dienen können."""
+        creative_prompt = f"""
+        Du bist ein Marktforschungsexperte. Führe eine fundierte Recherche zu folgender innovativen Geschäftsidee durch: '{prompt_text}'.
+
+        1. Suche 3–5 qualitativ hochwertige und aktuelle Online-Quellen (z. B. Marktanalysen, technische Berichte, Branchen-Blogartikel).
+            - Bitte keine App-Stores, Social Media oder Werbung.
+        2. Für jede Quelle:
+            - Gib Titel, Veröffentlichungsjahr, Quelle (Domain) und einen kurzen Abstract (2–3 Sätze) an.
+        3. Fasse anschließend die wichtigsten Markttrends und Herausforderungen zusammen.
+        4. Identifiziere potenzielle Nischen, unerfüllte Kundenbedürfnisse oder ungelöste Probleme, die Chancen für die Geschäftsidee bieten könnten.
+        """
         data = {
             "model": "sonar",
             "messages": [
@@ -24,6 +30,7 @@ Fasse die wichtigsten Erkenntnisse aus den gefundenen Quellen zusammen und ident
                 }
             ]
         }
+        
         response = requests.post(url, headers=headers, json=data)
         if response.status_code == 200:
             result = response.json()
