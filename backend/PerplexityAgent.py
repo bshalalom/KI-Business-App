@@ -16,10 +16,13 @@ class PerplexityAgent:
 
         1. Suche 3–5 qualitativ hochwertige und aktuelle Online-Quellen (z. B. Marktanalysen, technische Berichte, Branchen-Blogartikel).
             - Bitte keine App-Stores, Social Media oder Werbung.
-        2. Für jede Quelle:
-            - Gib Titel, Veröffentlichungsjahr, Quelle (Domain) und einen kurzen Abstract (2–3 Sätze) an.
-        3. Fasse anschließend die wichtigsten Markttrends und Herausforderungen zusammen.
-        4. Identifiziere potenzielle Nischen, unerfüllte Kundenbedürfnisse oder ungelöste Probleme, die Chancen für die Geschäftsidee bieten könnten.
+        2. Fasse die wichtigsten Markttrends und Herausforderungen zusammen.
+        3. Identifiziere potenzielle Nischen, unerfüllte Kundenbedürfnisse oder ungelöste Probleme, die Chancen für die Geschäftsidee bieten könnten.
+
+        Strukturiere die Antwort in den folgenden Abschnitten:
+        - Quellenübersicht
+        - Zusammenfassung der Trends und Herausforderungen
+        - Potenzielle Nischen und Marktchancen
         """
         data = {
             "model": "sonar",
