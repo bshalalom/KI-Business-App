@@ -1,14 +1,14 @@
 from fastapi import FastAPI
-from backend.routers import analyze_all
-from backend.routers import openai_agents
-from backend.routers import perplexity_agent
+from backend.routers import AnalyzeAllRouter
+from backend.routers import OpenAIAgentsRouter
+from backend.routers import PerplexityAgentsRouter
 
 app = FastAPI()
 
 # Binde alle Router ein
-app.include_router(analyze_all.router)
-app.include_router(openai_agents.router)
-app.include_router(perplexity_agent.router)
+app.include_router(AnalyzeAllRouter.router)
+app.include_router(OpenAIAgentsRouter.router)
+app.include_router(PerplexityAgentsRouter.router)
 
 @app.get("/")
 async def root():

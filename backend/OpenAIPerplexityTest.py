@@ -3,7 +3,7 @@ from WebScraper import WebScraper
 from config import OPENAI_API_KEY, PERPLEXITY_API_KEY
 from OpenAIAnalysisAgent import OpenAIAnalysisAgent
 from OpenAIReviewerAgent import OpenAIReviewerAgent
-
+#not used anymore, just for testing purposes
 
 def main():
     analysisAgent = OpenAIAnalysisAgent(OPENAI_API_KEY)
@@ -17,6 +17,7 @@ def main():
     count = 0
     satisfied = False
 
+    #openAI Analyse des Perplexitytestss
     analysis = analysisAgent.analyzePerplexityText(perplexityText)
     print(analysis)
 
@@ -24,7 +25,7 @@ def main():
         review = reviewerAgent.review_analysis(analysis)
         print(review)
         score = reviewerAgent.extract_score(review)
-        count = count + 1
+        count += 1
         if score < 7:
             review2 = analysisAgent.revise_with_feedback(analysis, review)
             print(review2)

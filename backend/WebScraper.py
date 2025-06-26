@@ -45,3 +45,25 @@ def scrape_website(url: str) -> ScrapedContent:
 class WebScraper:
     def scrape(self, url: str) -> ScrapedContent:
         return scrape_website(url)
+
+#old class, not used anymore as bs4 is not supported anymore
+#import requests
+#from requests_html import HTMLSession
+#from bs4 import BeautifulSoup
+
+#Beautiful Soup not compatible
+#class WebScraper:
+#    def __init__(self):
+#        self.session = HTMLSession()
+
+#    def scrapeWebsite(self, url):
+#       try:
+#          response = requests.get(url)
+#         response.raise_for_status()
+#        html = response.text
+#       bs = BeautifulSoup(html, 'html.parser')
+#      text = bs.get_text()
+#     return text
+#except Exception as e:
+#   print("Fehler beim Scrapen von {url}: {e}")
+#  return ""

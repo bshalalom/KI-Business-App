@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from backend.OpenAIAnalysisAgent import OpenAIAnalysisAgent
 from backend.OpenAIReviewerAgent import OpenAIReviewerAgent
-from backend.pdfReader import extract_text_from_pdf
+from backend.PdfReader import extract_text_from_pdf
 from backend.WebScraper import scrape_website
 
 router = APIRouter()

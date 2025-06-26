@@ -6,7 +6,7 @@ if sys.platform == "win32":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 from fastapi import FastAPI
-from backend.routers import analyze_all, openai_agents, perplexity_agent
+from backend.routers import AnalyzeAllRouter, OpenAIAgentsRouter, PerplexityAgentsRouter
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -24,9 +24,9 @@ app.add_middleware(
 )
 
 # Einbinden der verschiedenen API-Routen
-app.include_router(analyze_all.router)
-app.include_router(openai_agents.router)
-app.include_router(perplexity_agent.router)
+app.include_router(AnalyzeAllRouter.router)
+app.include_router(OpenAIAgentsRouter.router)
+app.include_router(PerplexityAgentsRouter.router)
 
 # Standard-Endpunkt zur Überprüfung, ob der Server läuft
 @app.get("/")

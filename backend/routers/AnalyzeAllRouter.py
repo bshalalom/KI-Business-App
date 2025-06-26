@@ -8,7 +8,7 @@ import requests
 from backend.PerplexityAgent import PerplexityAgent
 from backend.OpenAIAnalysisAgent import OpenAIAnalysisAgent
 from backend.OpenAIReviewerAgent import OpenAIReviewerAgent
-from backend.pdfReader import extract_text_from_pdf
+from backend.PdfReader import extract_text_from_pdf
 from backend.WebScraper import scrape_website
 from backend import config
 
