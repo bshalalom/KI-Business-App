@@ -1,2 +1,3 @@
-OPENAI_API_KEY = "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"
-PERPLEXITY_API_KEY = "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"
+#for safety reasons keys not in github
+#test
+#test

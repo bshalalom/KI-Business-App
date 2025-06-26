@@ -4,6 +4,8 @@ from backend.OpenAIAnalysisAgent import OpenAIAnalysisAgent
 from backend.OpenAIReviewerAgent import OpenAIReviewerAgent
 from backend.config import OPENAI_API_KEY
 
+#do not use, just for historical purposes still in REPO
+
 #extra class for the openAI instances, for FastAPI usage
 #pydantic for automatic data validation
 

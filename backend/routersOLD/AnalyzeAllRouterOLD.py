@@ -6,6 +6,8 @@ from backend.OpenAIReviewerAgent import OpenAIReviewerAgent
 from backend.PdfReader import extract_text_from_pdf
 from backend.WebScraper import scrape_website
 
+#do not use, just for historical purposes still in REPO
+
 router = APIRouter()
 
 class AnalyzeRequest(BaseModel):

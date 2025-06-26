@@ -3,6 +3,8 @@ from pydantic import BaseModel
 from backend.PerplexityAgent import PerplexityAgent
 from backend.config import PERPLEXITY_API_KEY
 
+#do not use, just for historical purposes still in REPO
+
 router = APIRouter(prefix="/perplexity", tags=["Perplexity Agent"])
 
 agent = PerplexityAgent()

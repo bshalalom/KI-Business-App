@@ -57,9 +57,11 @@ async def analyze_all(
                      web_texts.append(f"[Fehler beim Scrapen von {url}: {scraped_data.error}]")
         except Exception as e:
             web_texts.append(f"[Fehler bei der Verarbeitung von URL {url}: {str(e)}]")
-    
+
     combined_pdf_text = "\n\n".join(pdf_texts_list)
-    full_text = f"Recherche-Zusammenfassung:\n{perplexity_summary}\n\nZusätzliche Details aus den Quellen:\n{scraped_context}"
+
+    scraped_context = str (web_texts) + str(combined_pdf_text)
+    full_text: str = (f"Recherche-Zusammenfassung:\n{perplexity_summary}\n\nZusätzliche Details aus den Quellen:\n{scraped_context}")
 
     analyzer = OpenAIAnalysisAgent(api_key=config.OPENAI_API_KEY)
     reviewer = OpenAIReviewerAgent(api_key=config.OPENAI_API_KEY)
@@ -74,7 +76,7 @@ async def analyze_all(
         feedback_iterations.append(
             f"[Durchgang {i+1}]\nAnalyse: {analysis}\nFeedback: {feedback}\nScore: {score}"
         )
-        if score >= 8:
+        if score >= 7:
             break
         full_text += "\n\nFeedback zur Verbesserung:\n" + feedback[:1000]
 
